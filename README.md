@@ -9,13 +9,13 @@ fillInFile('#input-element', { url: 'base64content', name: 'example.jpg' })
 
 ### Variants
 
- ##### Simple mock
+##### Simple mock
  ```
 fillInFile('#input-element')
 ```
 It will automatically add the [mock js-base64 image](https://github.com/prakashchokalingam/fill-in-file/blob/master/mock/base64.js) and will trigger the onchange event.
 
- ##### String
+##### String
  ```
 fillInFile('#input-element', 'base64content')
   
