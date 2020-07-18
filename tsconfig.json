@@ -2,7 +2,7 @@
     "compilerOptions": {
         "module": "es6",
         "target": "es5",
-        "outDir": "./"
+        "outDir": "./lib"
     },
     "include": [
        "./src/"
