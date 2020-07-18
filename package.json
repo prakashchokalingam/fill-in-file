@@ -1,0 +1,26 @@
+{
+  "name": "fill-in-file",
+  "version": "1.0.0",
+  "description": "A test util which helps to mock file upload in your file input element",
+  "main": "index.js",
+  "scripts": {
+    "compile": "node node_modules/typescript/bin/tsc index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prakashchokalingam/fill-in-file.git"
+  },
+  "keywords": [
+    "fileInputmock"
+  ],
+  "author": "Prakash Chockalingam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/prakashchokalingam/fill-in-file/issues"
+  },
+  "homepage": "https://github.com/prakashchokalingam/fill-in-file#readme",
+  "devDependencies": {
+    "typescript": "^3.9.7"
+  }
+}
