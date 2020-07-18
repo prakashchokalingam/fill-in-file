@@ -1,23 +1,23 @@
-import { file, options }  from './fill-in-file.dto';
+import { file, options }  from './index.dto';
 
-const DataTransfer: any = () => {
+const DT: any = () => {
   return new ClipboardEvent('').clipboardData || new DataTransfer();
 }
 
 const getBlob: any= async (url: string) => {
   try {
-    return await fetch(url).then(res => res.blob);
+    return await fetch(url).then(res => res.blob());
   } catch(e) {
     console.error('Fetching failed');
     throw new Error(e.stack);
   }
 };
 
-const fillInFile = async (domSelector: string, files: [file], options: options) => {
-  const dataTransfer: DataTransfer = DataTransfer();
+const fillInFile = async (domSelector: string, files: [file], options: options = {}) => {
+  const dataTransfer: DataTransfer = DT();
 
   // get element
-  const $document: Document = options.documentContext || Document;
+  const $document: Document = options.documentContext || document;
   const $element: HTMLInputElement = $document.querySelector(domSelector);
   if (!$element) {
     throw new Error(`Element not found, ${domSelector}`);
@@ -42,5 +42,4 @@ const fillInFile = async (domSelector: string, files: [file], options: options) 
   return true;
 };
 
-
-export { fillInFile, getBlob, DataTransfer };
+export { fillInFile, getBlob, DT };

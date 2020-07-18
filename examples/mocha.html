@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A simple mocha demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/mocha@8.0.1/mocha.css" />
+  <script src="https://unpkg.com/mocha@8.0.1/mocha.js"></script>
+</head>
+
+<body>
+
+  <style>
+    .app {
+      border: 1px solid #999;
+      padding: 10px;
+      margin-bottom: 50px;
+    }
+
+    #previewer div {
+      display: inline-block;
+      border: 1px solid blue;
+      width: 300px;
+      height: 300px;
+      text-align: center;
+      padding-bottom: 8px;
+    }
+
+    #previewer img {
+      width: 100%;
+      height: 80%;
+    }
+
+    #previewer p {
+      text-align: center;
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+  </style>
+
+  <div class="app">
+    <p id="heading">A simple image preview app </p>
+    <p>
+      Upload file:
+      <input type="file" multiple="true" id="input-upload" onChange="displayFiles(event)" />
+    </p>
+
+    <div id="previewer"></div>
+  </div>
+
+
+  <script>
+    function displayFiles(event) {
+      let files = event.target.files;
+      let previewer = document.getElementById('previewer');
+      for (const file of files) {
+        let d = document.createElement('div');
+        let image = document.createElement('img')
+        image.src = URL.createObjectURL(file);
+        d.appendChild(image);
+
+        let title = document.createElement('span');
+        title.innerHTML = `<p>${file.name}</p> <p>(${file.size} bytes)</p>`;
+        d.appendChild(title);
+
+        previewer.appendChild(d);
+      }
+    }
+  </script>
+
+
+
+  <div id="mocha"></div>
+
+  <script type="module">
+
+  import { fillInFile } from '../index.js';
+  import { JS_BASE64_PNG } from './images/base64.js';
+
+    mocha.setup('bdd');
+
+    describe('fillInFile mocha test cases', function() {
+      it( "It displays image preview after uploading the files (url)", function (done) {
+        let file = { url:'./images/mocha.png', name: 'mocha.png' };
+
+        fillInFile('#input-upload', [file]).then(() => {
+          let previewedFile = document.querySelectorAll('#previewer img');
+          if (previewedFile.length === 1) {
+            done()
+          } else {
+            throw new Error('Failed')
+          }
+        });
+      });
+
+      it( "It displays image preview after uploading the files (base64)", function (done) {
+        let file = { url: JS_BASE64_PNG, name: 'js.png' };
+
+        fillInFile('#input-upload', [file]).then(() => {
+          let previewedFile = document.querySelectorAll('#previewer img');
+          if (previewedFile.length === 2) {
+            done()
+          } else {
+            throw new Error('Failed')
+          }
+        });
+      });
+    });
+
+  mocha.run();
+  </script>
+
+
+</body>
+
+</html>
