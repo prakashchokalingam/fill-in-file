@@ -34,6 +34,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+import { JS_BASE64_PNG } from '../mock/base64.js';
 var DT = function () {
     return new ClipboardEvent('').clipboardData || new DataTransfer();
 };
@@ -56,32 +57,68 @@ var getBlob = function (url) { return __awaiter(void 0, void 0, void 0, function
 var fillInFile = function (domSelector, files, options) {
     if (options === void 0) { options = {}; }
     return __awaiter(void 0, void 0, void 0, function () {
-        var dataTransfer, $document, $element, _i, files_1, file, blob, fileObject, changeEvent;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var $document, $element, dataTransfer, addFile, _a, _i, files_1, file, changeEvent;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0:
-                    dataTransfer = DT();
                     $document = options.documentContext || document;
                     $element = $document.querySelector(domSelector);
                     if (!$element) {
                         throw new Error("Element not found, " + domSelector);
                     }
-                    _i = 0, files_1 = files;
-                    _a.label = 1;
+                    dataTransfer = DT();
+                    addFile = function (file) { return __awaiter(void 0, void 0, void 0, function () {
+                        var blob, fileObject;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, getBlob(file.url)];
+                                case 1:
+                                    blob = _a.sent();
+                                    fileObject = new File([blob], file.name, file.options);
+                                    // push to data transfer
+                                    dataTransfer.items.add(fileObject);
+                                    return [2 /*return*/];
+                            }
+                        });
+                    }); };
+                    _a = typeof files;
+                    switch (_a) {
+                        case 'object': return [3 /*break*/, 1];
+                        case 'string': return [3 /*break*/, 9];
+                    }
+                    return [3 /*break*/, 11];
                 case 1:
-                    if (!(_i < files_1.length)) return [3 /*break*/, 4];
-                    file = files_1[_i];
-                    return [4 /*yield*/, getBlob(file.url)];
+                    if (!Array.isArray(files)) return [3 /*break*/, 6];
+                    _i = 0, files_1 = files;
+                    _b.label = 2;
                 case 2:
-                    blob = _a.sent();
-                    fileObject = new File([blob], file.name, file.options);
-                    // push to data transfer
-                    dataTransfer.items.add(fileObject);
-                    _a.label = 3;
+                    if (!(_i < files_1.length)) return [3 /*break*/, 5];
+                    file = files_1[_i];
+                    return [4 /*yield*/, addFile(file)];
                 case 3:
-                    _i++;
-                    return [3 /*break*/, 1];
+                    _b.sent();
+                    _b.label = 4;
                 case 4:
+                    _i++;
+                    return [3 /*break*/, 2];
+                case 5: return [3 /*break*/, 8];
+                case 6: return [4 /*yield*/, addFile(files)];
+                case 7:
+                    _b.sent();
+                    _b.label = 8;
+                case 8: return [3 /*break*/, 13];
+                case 9: return [4 /*yield*/, addFile({ url: files, name: 'sample.jpg' })];
+                case 10:
+                    _b.sent();
+                    return [3 /*break*/, 13];
+                case 11: 
+                // mock file
+                return [4 /*yield*/, addFile({ url: JS_BASE64_PNG, name: 'javascript.png' })];
+                case 12:
+                    // mock file
+                    _b.sent();
+                    _b.label = 13;
+                case 13:
                     // set files to element
                     $element.files = dataTransfer.files;
                     changeEvent = new Event('change');

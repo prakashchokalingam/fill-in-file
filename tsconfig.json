@@ -2,9 +2,10 @@
     "compilerOptions": {
         "module": "es6",
         "target": "es5",
+        "outDir": "./"
     },
     "include": [
-        "*.ts"
+       "./src/"
     ],
     "exclude": [
         "node_modules"

@@ -11,6 +11,7 @@
 
 <body>
 
+  <!-- sample app -->
   <style>
     .app {
       border: 1px solid #999;
@@ -21,8 +22,8 @@
     #previewer div {
       display: inline-block;
       border: 1px solid blue;
-      width: 300px;
-      height: 300px;
+      width: 150px;
+      height: 150px;
       text-align: center;
       padding-bottom: 8px;
     }
@@ -37,13 +38,19 @@
       font-size: 0.8em;
       font-weight: bold;
     }
+
+    .ellipsis {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
   </style>
 
   <div class="app">
     <p id="heading">A simple image preview app </p>
     <p>
       Upload file:
-      <input type="file" multiple="true" id="input-upload" onChange="displayFiles(event)" />
+      <input type="file" multiple="true" id="input-upload" onChange="displayFiles(event)" accept="image/*" />
     </p>
 
     <div id="previewer"></div>
@@ -61,11 +68,18 @@
         d.appendChild(image);
 
         let title = document.createElement('span');
-        title.innerHTML = `<p>${file.name}</p> <p>(${file.size} bytes)</p>`;
+        title.innerHTML = `<p class="ellipsis">${file.name}</p> <p>(${bytesToSize(file.size)})</p>`;
         d.appendChild(title);
 
         previewer.appendChild(d);
       }
+    }
+
+    function bytesToSize(bytes) {
+      let sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+      if (bytes == 0) return '0 Byte';
+      var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+      return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
     }
   </script>
 
@@ -74,35 +88,46 @@
   <div id="mocha"></div>
 
   <script type="module">
-
-  import { fillInFile } from '../index.js';
-  import { JS_BASE64_PNG } from './images/base64.js';
+    import { fillInFile } from '../index.js';
+    import { firefox } from './images/base64.js'
 
     mocha.setup('bdd');
 
     describe('fillInFile mocha test cases', function() {
-      it( "It displays image preview after uploading the files (url)", function (done) {
-        let file = { url:'./images/mocha.png', name: 'mocha.png' };
-
-        fillInFile('#input-upload', [file]).then(() => {
+      it( "It displays image preview after uploading the files (mock)", function (done ) {
+        fillInFile('#input-upload').then(() => {
           let previewedFile = document.querySelectorAll('#previewer img');
           if (previewedFile.length === 1) {
-            done()
-          } else {
-            throw new Error('Failed')
+            done();
           }
         });
       });
 
-      it( "It displays image preview after uploading the files (base64)", function (done) {
-        let file = { url: JS_BASE64_PNG, name: 'js.png' };
-
-        fillInFile('#input-upload', [file]).then(() => {
+      it("It displays image preview after uploading the files (string)", function (done ) {
+        fillInFile('#input-upload', './images/mocha.png').then(() => {
           let previewedFile = document.querySelectorAll('#previewer img');
           if (previewedFile.length === 2) {
-            done()
-          } else {
-            throw new Error('Failed')
+            done();
+          }
+        });
+      });
+
+      it("IIt displays image preview after uploading the files (base64)(object)", function (done ) {
+        let file = { url: firefox, name: 'firefox.png' };
+        fillInFile('#input-upload', file).then(() => {
+          let previewedFile = document.querySelectorAll('#previewer img');
+          if (previewedFile.length === 3) {
+            done();
+          }
+        });
+      });
+
+      it("It displays image preview after uploading the files (array)", function (done ) {
+        let files = [{ url: './images/chrome.png', name: 'chrome.png' }, { url: './images/typescript.png', name: 'typescript.png' }];
+        fillInFile('#input-upload', files).then(() => {
+          let previewedFile = document.querySelectorAll('#previewer img');
+          if (previewedFile.length === 5) {
+            done();
           }
         });
       });

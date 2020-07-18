@@ -23,8 +23,8 @@
     #previewer div {
       display: inline-block;
       border: 1px solid blue;
-      width: 300px;
-      height: 300px;
+      width: 150px;
+      height: 150px;
       text-align: center;
       padding-bottom: 8px;
     }
@@ -39,13 +39,19 @@
       font-size: 0.8em;
       font-weight: bold;
     }
+
+    .ellipsis {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
   </style>
 
   <div class="app">
     <p id="heading">A simple image preview app </p>
     <p>
       Upload file:
-      <input type="file" multiple="true" id="input-upload" onChange="displayFiles(event)" />
+      <input type="file" multiple="true" id="input-upload" onChange="displayFiles(event)" accept="image/*" />
     </p>
 
     <div id="previewer"></div>
@@ -63,12 +69,19 @@
         d.appendChild(image);
 
         let title = document.createElement('span');
-        title.innerHTML = `<p>${file.name}</p> <p>(${file.size} bytes)</p>`;
+        title.innerHTML = `<p class="ellipsis">${file.name}</p> <p>(${bytesToSize(file.size)})</p>`;
         d.appendChild(title);
 
         previewer.appendChild(d);
       }
     }
+
+    function bytesToSize(bytes) {
+      let sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+      if (bytes == 0) return '0 Byte';
+        var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+        return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+      }
   </script>
 
   <!-- qunit area -->
@@ -79,20 +92,32 @@
   <!-- test cases -->
   <script type="module">
     import { fillInFile } from '../index.js';
-    import { JS_BASE64_PNG } from './images/base64.js';
+    import { firefox } from './images/base64.js'
 
-    QUnit.test( "It displays image preview after uploading the files (url)", async function (assert ) {
-      let file = { url:'./images/qunit.png', name: 'qunitjs.png' };
-      await fillInFile('#input-upload', [file]);
+    QUnit.test( "It displays image preview after uploading the files (mock)", async function (assert ) {
+      await fillInFile('#input-upload');
       let previewedFile = document.querySelectorAll('#previewer img');
-      assert.equal(1, previewedFile.length, "Uploaded a file");
+      assert.equal(1, previewedFile.length, "Uploaded mock file");
     });
 
-    QUnit.test( "It displays image preview after uploading the files (base64)", async function (assert ) {
-      let file = { url: JS_BASE64_PNG, name: 'js.png' };
-      await fillInFile('#input-upload', [file]);
+    QUnit.test( "It displays image preview after uploading the files (string)", async function (assert ) {
+      await fillInFile('#input-upload', './images/qunit.png');
       let previewedFile = document.querySelectorAll('#previewer img');
-      assert.equal(2, previewedFile.length, "Uploaded one file");
+      assert.equal(2, previewedFile.length, "Uploaded a file");
+    });
+
+    QUnit.test( "It displays image preview after uploading the files (base64)(object)", async function (assert ) {
+      let file = { url: firefox, name: 'firefox.png' };
+      await fillInFile('#input-upload', file);
+      let previewedFile = document.querySelectorAll('#previewer img');
+      assert.equal(3, previewedFile.length, "Uploaded a file");
+    });
+
+    QUnit.test( "It displays image preview after uploading the files (array)", async function (assert ) {
+      let files = [{ url: './images/chrome.png', name: 'chrome.png' }, { url: './images/typescript.png', name: 'typescript.png' }];
+      await fillInFile('#input-upload', files);
+      let previewedFile = document.querySelectorAll('#previewer img');
+      assert.equal(5, previewedFile.length, "Uploaded files");
     });
   </script>
 
