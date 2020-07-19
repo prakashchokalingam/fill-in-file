@@ -1,7 +1,5 @@
-[![npm version](http://img.shields.io/npm/v/fill-in-file.svg?style=flat-square&color=success)](https://www.npmjs.com/package/fill-in-file "View this project on npm")
-[![npm](https://img.shields.io/npm/dm/fill-in-file.svg?style=flat-square)](https://www.npmjs.com/package/fill-in-file)
+# fill-in-file [![npm version](http://img.shields.io/npm/v/fill-in-file.svg?style=flat-square&color=success)](https://www.npmjs.com/package/fill-in-file "View this project on npm")
 
-# fill-in-file
 A test util that helps to fill files in your file input element
 
 ### Usage
@@ -69,4 +67,7 @@ params:
 Qunit: https://prakashchokalingam.github.io/fill-in-file/examples/qunit.html
 
 Mocha: https://prakashchokalingam.github.io/fill-in-file/examples/mocha.html
+
+[![npm version](http://img.shields.io/npm/v/fill-in-file.svg?style=flat-square&color=success)](https://www.npmjs.com/package/fill-in-file "View this project on npm")
+[![npm](https://img.shields.io/npm/dm/fill-in-file.svg?style=flat-square)](https://www.npmjs.com/package/fill-in-file)
 
