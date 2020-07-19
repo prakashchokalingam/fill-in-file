@@ -1,15 +1,15 @@
 # fill-in-file
 A test util that helps to fill files in your file input element
 
-### How
-
-https://dev.to/prakash_choks/codebytes-how-to-mock-upload-files-in-the-test-cases-1g87
-
 ### Usage
 
 ```
 fillInFile('#input-element', { url: 'base64content', name: 'example.jpg' })
 ```
+
+### How
+
+https://dev.to/prakash_choks/codebytes-how-to-mock-upload-files-in-the-test-cases-1g87
 
 ### Variants
 
