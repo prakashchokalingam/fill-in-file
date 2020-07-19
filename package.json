@@ -1,7 +1,7 @@
 {
   "name": "fill-in-file",
-  "version": "0.0.1",
-  "description": "A test util which helps to mock file upload in your file input element",
+  "version": "0.0.2",
+  "description": "A test util that helps to fill files in your file input element",
   "main": "index.js",
   "scripts": {
     "compile": "tsc --project tsconfig.json",
