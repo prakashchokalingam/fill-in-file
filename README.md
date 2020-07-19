@@ -55,11 +55,11 @@ fillInFile('#input-element', files);
 ##### Method: [fillInFile](https://github.com/prakashchokalingam/fill-in-file/blob/master/src/index.ts#L17)
 
 params:
-|   name	|   type	| required  	|   description	|   	|
-|:-:	|:-:	|:-:	|---	|---	|
-|  domSelector 	|  string 	|   yes	|  dom query selector string for the input file element 	|   	|
-|  files 	|  undefined - string - [file](https://github.com/prakashchokalingam/fill-in-file/blob/master/src/index.dto.ts) - [[file](https://github.com/prakashchokalingam/fill-in-file/blob/master/src/index.dto.ts)]	|   optional	|  file contents to be added to the file element 	| |
-| options | [object](https://github.com/prakashchokalingam/fill-in-file/blob/master/src/index.dto.ts#L16) 	|  optional 	|   supports options like `documentContext` that lets you pass a custom document context, by default util uses global document	|   	|
+|   name	|   type	| required  	|   description	|
+|:-:	|:-:	|:-:	|---	|
+|  domSelector 	|  string 	|   yes	|  dom query selector string for the input file element 	|
+|  files 	|  undefined - string - [file](https://github.com/prakashchokalingam/fill-in-file/blob/master/src/index.dto.ts) - [[file](https://github.com/prakashchokalingam/fill-in-file/blob/master/src/index.dto.ts)]	|   optional	|  file contents to be added to the file element 	|
+| options | [object](https://github.com/prakashchokalingam/fill-in-file/blob/master/src/index.dto.ts#L16) 	|  optional 	|   supports options like `documentContext` that lets you pass a custom document context, by default util uses global document	|
 
 
 ### Examples
