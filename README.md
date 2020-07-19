@@ -8,9 +8,17 @@ A test util that helps to fill files in your file input element
 fillInFile('#input-element', { url: 'base64content', name: 'example.jpg' })
 ```
 
+### Install
+```
+npm install fill-in-file
+```
+
+
 ### How
 
-https://dev.to/prakash_choks/codebytes-how-to-mock-upload-files-in-the-test-cases-1g87
+Please check this [article](https://dev.to/prakash_choks/codebytes-how-to-mock-upload-files-in-the-test-cases-1g87) for implementation details.
+
+
 
 ### Variants
 
