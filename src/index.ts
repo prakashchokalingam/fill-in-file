@@ -2,7 +2,7 @@ import { file, options } from './index.dto';
 import { JS_BASE64_PNG } from '../mock/base64.js';
 
 const DT: any = () => {
-  return new ClipboardEvent('').clipboardData || new DataTransfer();
+  return new DataTransfer() || new ClipboardEvent('').clipboardData;
 }
 
 const getBlob: any = async (url: string) => {
