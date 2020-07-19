@@ -1,5 +1,9 @@
 # fill-in-file
-A test util which helps to mock file upload for file input elements
+A test util that helps to fill files in your file input element
+
+### How
+
+https://dev.to/prakash_choks/codebytes-how-to-mock-upload-files-in-the-test-cases-1g87
 
 ### Usage
 
@@ -13,7 +17,7 @@ fillInFile('#input-element', { url: 'base64content', name: 'example.jpg' })
  ```
 fillInFile('#input-element')
 ```
-It will automatically add the [mock js-base64 image](https://github.com/prakashchokalingam/fill-in-file/blob/master/mock/base64.js) and will trigger the onchange event.
+It automatically adds the [mock js-base64 image](https://github.com/prakashchokalingam/fill-in-file/blob/master/mock/base64.js) and triggers the onchange event.
 
 ##### String
  ```
@@ -32,7 +36,7 @@ fillInFile('#input-element', { url: 'base64content', name: 'logo.jpg' });
  
 fillInFile('#input-element', { url: 'https://some-public-file-url.jpg', name:  'profile.jpg' });
 ```
-It will add the given file to the file input and will trigger the onchange event.
+It adds the given file to the file input and triggers the onchange event.
 
 ##### Multiple files
 
@@ -54,7 +58,7 @@ params:
 |:-:	|:-:	|:-:	|---	|---	|
 |  domSelector 	|  string 	|   yes	|  dom query selector string for the input file element 	|   	|
 |  files 	|  undefined - string - [file](https://github.com/prakashchokalingam/fill-in-file/blob/master/src/index.dto.ts) - [[file](https://github.com/prakashchokalingam/fill-in-file/blob/master/src/index.dto.ts)]	|   optional	|  file contents to be added to the file element 	| |
-| options | [object](https://github.com/prakashchokalingam/fill-in-file/blob/master/src/index.dto.ts#L16) 	|  optional 	|   supports options like `documentContext` so that you can pass custom document context, by default util will use global document	|   	|
+| options | [object](https://github.com/prakashchokalingam/fill-in-file/blob/master/src/index.dto.ts#L16) 	|  optional 	|   supports options like `documentContext` that lets you pass a custom document context, by default util uses global document	|   	|
 
 
 ### Examples
@@ -62,3 +66,4 @@ params:
 Qunit: https://prakashchokalingam.github.io/fill-in-file/examples/qunit.html
 
 Mocha: https://prakashchokalingam.github.io/fill-in-file/examples/mocha.html
+
