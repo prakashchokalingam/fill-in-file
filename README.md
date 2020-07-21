@@ -31,18 +31,18 @@ It automatically adds the [mock js-base64 image](https://github.com/prakashchoka
 ##### String
  ```
 fillInFile('#input-element', 'base64content')
-  
-  or 
- 
+
+  or
+
 fillInFile('#input-element', 'https://some-public-file-url.jpg');
 ```
 
 ##### Single file object
  ```
 fillInFile('#input-element', { url: 'base64content', name: 'logo.jpg' });
-  
-  or 
- 
+
+  or
+
 fillInFile('#input-element', { url: 'https://some-public-file-url.jpg', name:  'profile.jpg' });
 ```
 It adds the given file to the file input and triggers the onchange event.
@@ -69,6 +69,9 @@ params:
 |  files 	|  undefined - string - [file](https://github.com/prakashchokalingam/fill-in-file/blob/master/src/index.dto.ts) - [[file](https://github.com/prakashchokalingam/fill-in-file/blob/master/src/index.dto.ts)]	|   optional	|  file contents to be added to the file element 	|
 | options | [object](https://github.com/prakashchokalingam/fill-in-file/blob/master/src/index.dto.ts#L16) 	|  optional 	|   supports options like `documentContext` that lets you pass a custom document context, by default util uses global document	|
 
+
+### ember test helper
+https://github.com/prakashchokalingam/ember-fill-in-file
 
 ### Examples
 
