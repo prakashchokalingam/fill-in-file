@@ -1,6 +1,6 @@
 {
   "name": "fill-in-file",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A test util that helps to fill files in your file input element",
   "main": "index.js",
   "scripts": {
